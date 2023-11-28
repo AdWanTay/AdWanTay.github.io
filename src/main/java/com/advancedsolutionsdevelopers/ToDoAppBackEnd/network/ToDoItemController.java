@@ -16,9 +16,6 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
-// This means URL's start with /geek (after Application path)
-//@RequestMapping(path = "/list")
-
 public class ToDoItemController {
     @Autowired
     private ToDoItemRepository toDoItemRepository;
