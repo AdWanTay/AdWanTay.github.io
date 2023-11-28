@@ -35,7 +35,6 @@ public class ToDoItem {
     @Column(name = "deadline")
     private Long deadlineDate = 0L;
 
-
     public void setDeadlineDate(Long deadlineDate) {
         if (deadlineDate != null)
             this.deadlineDate = deadlineDate;
