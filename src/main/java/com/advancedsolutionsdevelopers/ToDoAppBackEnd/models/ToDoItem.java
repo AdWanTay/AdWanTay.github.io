@@ -23,6 +23,8 @@ public class ToDoItem {
 
     private String text;
 
+    private String author;
+
     @Column(name = "created_at")
     private Long creationDate;
 

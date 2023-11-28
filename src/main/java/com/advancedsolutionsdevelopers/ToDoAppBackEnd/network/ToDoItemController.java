@@ -2,6 +2,8 @@ package com.advancedsolutionsdevelopers.ToDoAppBackEnd.network;
 
 import com.advancedsolutionsdevelopers.ToDoAppBackEnd.models.ToDoItem;
 import com.advancedsolutionsdevelopers.ToDoAppBackEnd.database.ToDoItemRepository;
+import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.ArrayResponse;
+import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.SingleItemResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,9 +24,14 @@ public class ToDoItemController {
     private ToDoItemRepository toDoItemRepository;
 
     @GetMapping(path = "/list")
-    public ResponseEntity<Iterable<ToDoItem>> getTasksList(@RequestHeader("authorization") String authToken) {
-        System.out.println(authToken);
-        return new ResponseEntity<>(toDoItemRepository.findAll(), HttpStatus.OK);
+    public ArrayResponse getTasksList(@RequestHeader("authorization") String authToken) {
+        authToken = authToken.split(" ")[1];
+        System.out.printf(authToken);
+        ArrayResponse response = new ArrayResponse();
+        response.setStatus("200");
+        response.setRevision(1);
+        response.setList(toDoItemRepository.findAllByAuthor(authToken));
+        return response;
     }
 
     @GetMapping(path = "/list/{id}")

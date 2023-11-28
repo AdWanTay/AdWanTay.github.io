@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ToDoItemRepository extends CrudRepository<ToDoItem, Long> {
+    Iterable<ToDoItem> findAllByAuthor(String author);
 
 }
