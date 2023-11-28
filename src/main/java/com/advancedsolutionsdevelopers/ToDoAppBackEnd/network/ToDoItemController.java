@@ -38,8 +38,33 @@ public class ToDoItemController {
 
     }
 
-//    @PatchMapping(path = "/list")
-//    public
+    @PostMapping(path = "/list")
+    public SingleItemResponse addTask(@RequestBody SingleItemResponse itemResponse){
+        ToDoItem toDoItemResponse = itemResponse.getElement();
+        ToDoItem toDoItem = getToDoItem(toDoItemResponse);
+
+        toDoItemRepository.save(toDoItem);
+        SingleItemResponse response = new SingleItemResponse();
+        response.setStatus("200");
+        response.setRevision(1);
+        response.setElement(toDoItem);
+        return response;
+    }
+
+    private static ToDoItem getToDoItem(ToDoItem toDoItemResponse) {
+        ToDoItem toDoItem = new ToDoItem();
+        toDoItem.setAuthor(toDoItemResponse.getAuthor());
+        toDoItem.setImportance(toDoItemResponse.getImportance());
+        toDoItem.setCreationDate(toDoItemResponse.getCreationDate());
+        toDoItem.setText(toDoItemResponse.getText());
+        toDoItem.setDeadlineDate(toDoItemResponse.getDeadlineDate());
+        toDoItem.setIsCompleted(toDoItemResponse.getIsCompleted());
+        toDoItem.setLastEditDate(toDoItemResponse.getLastEditDate());
+        toDoItem.setLastUpdatedBy(toDoItemResponse.getLastUpdatedBy());
+        return toDoItem;
+    }
+
+
 
 
 }

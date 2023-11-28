@@ -1,18 +1,25 @@
 package com.advancedsolutionsdevelopers.ToDoAppBackEnd.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "todoitem")
 @Getter
 @Setter
 @ToString
-public class ToDoItem {
+@Data
+public class ToDoItem implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="todoitem_seq")
+
+    @SequenceGenerator(name="todoitem_seq",
+            sequenceName="todoitem_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "importance")
