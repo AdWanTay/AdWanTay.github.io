@@ -22,8 +22,8 @@ public class ToDoItemController {
     private ToDoItemRepository toDoItemRepository;
 
     @GetMapping(path = "/list")
-    public ResponseEntity<Iterable<ToDoItem>> getTasksList(@RequestHeader HttpHeaders headers) {
-        System.out.println(headers.toString());
+    public ResponseEntity<Iterable<ToDoItem>> getTasksList(@RequestHeader("authorization") String authToken) {
+        System.out.println(authToken);
         return new ResponseEntity<>(toDoItemRepository.findAll(), HttpStatus.OK);
     }
 
