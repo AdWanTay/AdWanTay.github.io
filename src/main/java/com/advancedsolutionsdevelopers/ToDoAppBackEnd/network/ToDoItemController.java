@@ -40,8 +40,11 @@ public class ToDoItemController {
 
     @PostMapping(path = "/list")
     public SingleItemResponse addTask(@RequestBody SingleItemResponse itemResponse){
+        System.out.println(itemResponse.toString());
         ToDoItem toDoItemResponse = itemResponse.getElement();
         ToDoItem toDoItem = getToDoItem(toDoItemResponse);
+        System.out.println(toDoItemResponse);
+
 
         toDoItemRepository.save(toDoItem);
         SingleItemResponse response = new SingleItemResponse();
