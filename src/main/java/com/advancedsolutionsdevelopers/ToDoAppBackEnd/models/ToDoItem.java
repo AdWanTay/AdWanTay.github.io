@@ -18,30 +18,25 @@ public class ToDoItem implements Serializable {
     @Id
     private String id;
 
-    @Column(name = "importance")
     private String importance;        //basic, low, important
 
-    @Column(name = "done")
-    private Boolean isCompleted;
+    private Boolean done;
 
     private String text;
 
     private String author;
 
     @Column(name = "created_at")
-    private Long creationDate;
+    private Long created_at;
 
     @Column(name = "changed_at")
-    private Long lastEditDate;
+    private Long changed_at;
 
     @Column(name = "last_updated_by")
-    private String lastUpdatedBy;
+    private String last_updated_by;
 
     @Column(name = "deadline")
-    private Long deadlineDate = 0L;
+    private Long deadline = 0L;
 
-    public void setDeadlineDate(Long deadlineDate) {
-        if (deadlineDate != null)
-            this.deadlineDate = deadlineDate;
-    }
+
 }

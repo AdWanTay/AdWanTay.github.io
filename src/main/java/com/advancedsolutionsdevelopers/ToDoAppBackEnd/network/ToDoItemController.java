@@ -31,41 +31,41 @@ public class ToDoItemController {
         return response;
     }
 
-    @GetMapping(path = "/list/{id}")
-    public ResponseEntity<ToDoItem> getTaskById(@PathVariable long id) {
-        Optional<ToDoItem> toDoItem = toDoItemRepository.findById(id);
-        return toDoItem.map(doItem -> new ResponseEntity<>(doItem, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-
-    }
+//    @GetMapping(path = "/list/{id}")
+//    public ResponseEntity<ToDoItem> getTaskById(@PathVariable long id) {
+//        Optional<ToDoItem> toDoItem = toDoItemRepository.findById(id);
+//        return toDoItem.map(doItem -> new ResponseEntity<>(doItem, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+//
+//    }
 
     @PostMapping(path = "/list")
     public SingleItemResponse addTask(@RequestBody SingleItemResponse itemResponse){
         System.out.println(itemResponse.toString());
         ToDoItem toDoItemResponse = itemResponse.getElement();
-        ToDoItem toDoItem = getToDoItem(toDoItemResponse);
+//        ToDoItem toDoItem = getToDoItem(toDoItemResponse);
         System.out.println(toDoItemResponse);
 
 
-        toDoItemRepository.save(toDoItem);
+        toDoItemRepository.save(toDoItemResponse);
         SingleItemResponse response = new SingleItemResponse();
         response.setStatus("200");
         response.setRevision(1);
-        response.setElement(toDoItem);
+        response.setElement(toDoItemResponse);
         return response;
     }
 
-    private static ToDoItem getToDoItem(ToDoItem toDoItemResponse) {
-        ToDoItem toDoItem = new ToDoItem();
-        toDoItem.setAuthor(toDoItemResponse.getAuthor());
-        toDoItem.setImportance(toDoItemResponse.getImportance());
-        toDoItem.setCreationDate(toDoItemResponse.getCreationDate());
-        toDoItem.setText(toDoItemResponse.getText());
-        toDoItem.setDeadlineDate(toDoItemResponse.getDeadlineDate());
-        toDoItem.setIsCompleted(toDoItemResponse.getIsCompleted());
-        toDoItem.setLastEditDate(toDoItemResponse.getLastEditDate());
-        toDoItem.setLastUpdatedBy(toDoItemResponse.getLastUpdatedBy());
-        return toDoItem;
-    }
+//    private static ToDoItem getToDoItem(ToDoItem toDoItemResponse) {
+//        ToDoItem toDoItem = new ToDoItem();
+//        toDoItem.setAuthor(toDoItemResponse.getAuthor());
+//        toDoItem.setImportance(toDoItemResponse.getImportance());
+//        toDoItem.setCreated_at(toDoItemResponse.g());
+//        toDoItem.setText(toDoItemResponse.getText());
+//        toDoItem.setDeadlineDate(toDoItemResponse.getDeadlineDate());
+//        toDoItem.setIsCompleted(toDoItemResponse.getIsCompleted());
+//        toDoItem.setLastEditDate(toDoItemResponse.getLastEditDate());
+//        toDoItem.setLastUpdatedBy(toDoItemResponse.getLastUpdatedBy());
+//        return toDoItem;
+//    }
 
 
 
