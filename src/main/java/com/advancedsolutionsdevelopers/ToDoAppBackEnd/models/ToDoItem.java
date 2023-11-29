@@ -16,11 +16,7 @@ import java.io.Serializable;
 @Data
 public class ToDoItem implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="todoitem_seq")
-
-    @SequenceGenerator(name="todoitem_seq",
-            sequenceName="todoitem_seq", allocationSize=1)
-    private Long id;
+    private String id;
 
     @Column(name = "importance")
     private String importance;        //basic, low, important
@@ -39,7 +35,7 @@ public class ToDoItem implements Serializable {
     private Long lastEditDate;
 
     @Column(name = "last_updated_by")
-    private Long lastUpdatedBy;
+    private String lastUpdatedBy;
 
     @Column(name = "deadline")
     private Long deadlineDate = 0L;
