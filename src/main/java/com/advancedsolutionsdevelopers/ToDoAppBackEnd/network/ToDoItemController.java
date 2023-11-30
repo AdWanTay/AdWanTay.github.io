@@ -2,18 +2,11 @@ package com.advancedsolutionsdevelopers.ToDoAppBackEnd.network;
 
 import com.advancedsolutionsdevelopers.ToDoAppBackEnd.models.ToDoItem;
 import com.advancedsolutionsdevelopers.ToDoAppBackEnd.database.ToDoItemRepository;
-import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.ArrayResponse;
-import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.SingleItemResponse;
+import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.ArrayRequest;
+import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.SingleItemRequest;
+import com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models.ToDoItemRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 @RestController
 public class ToDoItemController {
@@ -21,13 +14,13 @@ public class ToDoItemController {
     private ToDoItemRepository toDoItemRepository;
 
     @GetMapping(path = "/list")
-    public ArrayResponse getTasksList(@RequestHeader("authorization") String authToken) {
+    public ArrayRequest getTasksList(@RequestHeader("authorization") String authToken) {
         authToken = authToken.split(" ")[1];
         System.out.printf(authToken);
-        ArrayResponse response = new ArrayResponse();
+        ArrayRequest response = new ArrayRequest();
         response.setStatus("200");
         response.setRevision(1);
-        response.setList(toDoItemRepository.findAllByAuthor(authToken));
+        response.setList(ToDoItemRequest.ToDoItemBuilder(toDoItemRepository.findAllByAuthor(authToken)));
         return response;
     }
 
@@ -35,19 +28,19 @@ public class ToDoItemController {
 //    public ResponseEntity<ToDoItem> getTaskById(@PathVariable long id) {
 //        Optional<ToDoItem> toDoItem = toDoItemRepository.findById(id);
 //        return toDoItem.map(doItem -> new ResponseEntity<>(doItem, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-//
 //    }
 
     @PostMapping(path = "/list")
-    public SingleItemResponse addTask(@RequestBody SingleItemResponse itemResponse, @RequestHeader("authorization") String authToken){
+    public SingleItemRequest addTask(@RequestBody SingleItemRequest itemResponse, @RequestHeader("authorization") String authToken){
         System.out.println(itemResponse.toString());
+        System.out.println(authToken.split(" ")[1]);
         ToDoItem toDoItemResponse = itemResponse.getElement();
 //        ToDoItem toDoItem = getToDoItem(toDoItemResponse);
         System.out.println(toDoItemResponse);
         toDoItemResponse.setAuthor(authToken.split(" ")[1]);
 
         toDoItemRepository.save(toDoItemResponse);
-        SingleItemResponse response = new SingleItemResponse();
+        SingleItemRequest response = new SingleItemRequest();
         response.setStatus("200");
         response.setRevision(1);
         response.setElement(toDoItemResponse);
