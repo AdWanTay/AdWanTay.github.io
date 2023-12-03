@@ -56,7 +56,7 @@ public class ToDoItemController {
         SingleItemRequest response = new SingleItemRequest();
         if (toDoItemRepository.findById(id).isPresent()) {
             response.setElement(toDoItemRepository.findById(id).orElse(null));
-            response.setStatus("200");
+            response.setStatus("ok");
             response.setRevision(1);
             toDoItemRepository.deleteById(id);
         } else {
