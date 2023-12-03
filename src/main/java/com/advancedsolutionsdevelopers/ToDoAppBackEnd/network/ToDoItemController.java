@@ -9,12 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 public class ToDoItemController {
     @Autowired
     private ToDoItemRepository toDoItemRepository;
+
+
+    @GetMapping(path = "/")
+    public String hello() {
+        return "hello";
+    }
 
     @GetMapping(path = "/list")
     public ArrayRequest getTasksList(@RequestHeader("authorization") String authToken) {
@@ -66,6 +74,16 @@ public class ToDoItemController {
         return response;
     }
 
+    @PutMapping(path = "list/{id}")
+    public SingleItemRequest updateTask(@RequestHeader("authorization") String authToken, @RequestBody SingleItemRequest request, @RequestHeader("X-Last-Known-Revision") int rev, @PathVariable String id) {
+        SingleItemRequest response = new SingleItemRequest();
+        response.setElement(request.getElement());
+        response.getElement().setAuthor(authToken.split(" ")[1]);
+        toDoItemRepository.save(response.getElement());
+        response.setStatus("ok");
+        response.setRevision(++rev);
+        return response;
+    }
 
 //    private static ToDoItem getToDoItem(ToDoItem toDoItemResponse) {
 //        ToDoItem toDoItem = new ToDoItem();

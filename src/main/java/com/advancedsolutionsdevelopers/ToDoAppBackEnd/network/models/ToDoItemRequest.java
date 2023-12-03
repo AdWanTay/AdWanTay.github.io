@@ -1,12 +1,8 @@
 package com.advancedsolutionsdevelopers.ToDoAppBackEnd.network.models;
 
 import com.advancedsolutionsdevelopers.ToDoAppBackEnd.models.ToDoItem;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.Data;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Data
