@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class SingleItemRequest {
-    ToDoItem element;
     String status = null;
+    ToDoItem element;
     int revision = -1;
 }
 

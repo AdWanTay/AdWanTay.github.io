@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 public class ArrayRequest implements Serializable {
-    Iterable<ToDoItemRequest> list;
     String status = null;
+    Iterable<ToDoItemRequest> list;
     int revision = -1;
 }
