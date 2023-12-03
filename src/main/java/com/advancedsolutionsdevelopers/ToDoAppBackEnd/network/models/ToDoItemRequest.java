@@ -40,7 +40,6 @@ public class ToDoItemRequest {
             ToDoItemRequest toDoItemRequest = toDoItemFilling(toDoItem);
             toDoItemsRequest.add(toDoItemRequest);
         }
-
         return toDoItemsRequest;
     }
 

@@ -1,5 +1,7 @@
 package com.advancedsolutionsdevelopers.ToDoAppBackEnd.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -38,5 +40,8 @@ public class ToDoItem implements Serializable {
     @Column(name = "deadline")
     private Long deadline = 0L;
 
-
+    @JsonIgnore
+    public String getAuthor() {
+        return author;
+    }
 }

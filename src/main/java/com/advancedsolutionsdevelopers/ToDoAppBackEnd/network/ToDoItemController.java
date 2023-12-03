@@ -35,8 +35,8 @@ public class ToDoItemController {
 
     @PostMapping(path = "/list")
     public SingleItemRequest addTask(@RequestBody SingleItemRequest itemResponse, @RequestHeader("authorization") String authToken) {
-        System.out.println(itemResponse.toString());
-        System.out.println(authToken.split(" ")[1]);
+//        System.out.println(itemResponse.toString());
+//        System.out.println(authToken.split(" ")[1]);
         ToDoItem toDoItemResponse = itemResponse.getElement();
 //        ToDoItem toDoItem = getToDoItem(toDoItemResponse);
         System.out.println(toDoItemResponse);
