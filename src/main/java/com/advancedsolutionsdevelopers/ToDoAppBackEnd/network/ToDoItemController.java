@@ -9,17 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/list")
 public class ToDoItemController {
     @Autowired
     private ToDoItemRepository toDoItemRepository;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/list")
     public ArrayRequest getTasksList(@RequestHeader("authorization") String authToken) {
         authToken = authToken.split(" ")[1];
         System.out.printf(authToken);
@@ -36,7 +33,7 @@ public class ToDoItemController {
 //        return toDoItem.map(doItem -> new ResponseEntity<>(doItem, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
 //    }
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "/list")
     public SingleItemRequest addTask(@RequestBody SingleItemRequest itemResponse, @RequestHeader("authorization") String authToken) {
         System.out.println(itemResponse.toString());
         System.out.println(authToken.split(" ")[1]);
@@ -54,7 +51,7 @@ public class ToDoItemController {
     }
 
     //    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/list/{id}", produces = APPLICATION_JSON_VALUE)
     public SingleItemRequest deleteTask(@PathVariable String id) {
         SingleItemRequest response = new SingleItemRequest();
         if (toDoItemRepository.findById(id).isPresent()) {
