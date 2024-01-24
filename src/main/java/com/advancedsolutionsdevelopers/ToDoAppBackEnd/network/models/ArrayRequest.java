@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Data
 public class ArrayRequest implements Serializable {
     String status = null;
-    Iterable<ToDoItemRequest> list;
+    Iterable<ToDoItem> list;
     int revision = -1;
 }
